@@ -13,7 +13,7 @@ const test2 = '{"id":"1480614024626716681","text":"Announcing Honduras CLR Grant
 
 async function main() {
 	const [account] = await ethers.getSigners();
-	const contractAddress = "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853";
+	const contractAddress = "";
 	const contract = new ethers.Contract(contractAddress, Artifact.abi, account);
 
 	// addTweets
