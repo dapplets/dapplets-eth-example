@@ -260,7 +260,8 @@ export default () => {
 
 Now save changes and reload the Twitter page. On button click you will see the overlay with the selected tweet data.
 
-![2](https://user-images.githubusercontent.com/79759758/150326110-62c019c8-b69d-4d09-8d41-9bfead90bd9f.png)
+![3 (1)](https://user-images.githubusercontent.com/79759758/150392361-8e31b9fd-4fa0-4fc7-bafa-8929c2d84138.png)
+
 
 Thats cool! But our goal is to save this data to Etherium chain and get it back. So let's see the contract.
 
