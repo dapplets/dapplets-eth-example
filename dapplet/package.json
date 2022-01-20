@@ -1,7 +1,7 @@
 {
-  "name": "dapplets-near-example",
+  "name": "dapplets-eth-example",
   "version": "0.1.1",
-  "description": "An example of a dapplet using the NEAR protocol. Learn NEAR x Dapplets Project",
+  "description": "An example of a dapplet using the ETH protocol. Learn ETH x Dapplets Project",
   "main": "lib/index.js",
   "scripts": {
     "start": "rollup -w --config rollup.config.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dapplets/dapplet-near-example.git"
+    "url": "git+https://github.com/dapplets/dapplets-eth-example.git"
   },
   "author": "Dapplets Project",
   "license": "MIT",
