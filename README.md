@@ -266,9 +266,6 @@ Thats cool! But our goal is to save this data to Etherium chain and get it back.
 
 ### 2.3. Etherium smart contract
 
-Look at the th module `./contract`.
-
-In `./contract/assembly/index.ts` we see one `PersistentUnorderedMap`.
 It stores an array of serialized tweets data by the current user ID. It has methods for saving, removing and retrieving saved tweets.
 
 Let's see how to connect to the smart contract and use its methods in the dapplet.
