@@ -221,11 +221,7 @@ Let's go to the overlay.
 
 As I wrote above, the overlay can be created the way you want. We use **React** in most of our projects. I will not analyze the entire overlay code, but only the important points for our architectural aspects.
 
-For interaction with the dapplet install the npm package `dapplet-overlay-bridge`:
-
-```bash
-npm i @dapplets/dapplet-overlay-bridge
-```
+The @dapplets/dapplet-overlay-bridge dependency is used to interact with the overlay.`
 
 To get the data from the dapplet we need the class **Bridge** in the overlay part. Look at the module `./overlay/src/dappletBridge.ts`. Here is the `onData` method where we subscribe on the `'data'` event, which we've described in the dapplet.
 
