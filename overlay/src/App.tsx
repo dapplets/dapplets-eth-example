@@ -12,56 +12,55 @@ interface ICtx {
 
 export default () => {
   const [parsedCtx, setParsedCtx] = useState<ICtx>();
-  const [ethAccount, setEthAccount] = useState<string>();
-  const [savedTweets, setSavedTweets] = useState<string[]>();
-  const [isLoading, setLoading] = useState<boolean>();
+  // const [ethAccount, setEthAccount] = useState<string>();
+  // const [savedTweets, setSavedTweets] = useState<string[]>();
+  // const [isLoading, setLoading] = useState<boolean>();
   useEffect(() => {
-    bridge.onData((data?: ICtx) => {
-      setParsedCtx(data);
-    });
-    bridge.isWalletConnected().then(async (isWalletConnected) => {
-      let accountName: string | undefined;
-      if (isWalletConnected) {
-        accountName = await bridge.getCurrentEthAccount();
-      }
-      setEthAccount(accountName);
-
-      let tweets: string[] | undefined = undefined;
-      if (accountName) tweets = await bridge.getTweets(accountName);
-      setSavedTweets(tweets);
-    });
+    // bridge.onData((data?: ICtx) => {
+    //   setParsedCtx(data);
+    // });
+    // bridge.isWalletConnected().then(async (isWalletConnected) => {
+    //   let accountName: string | undefined;
+    //   if (isWalletConnected) {
+    //     accountName = await bridge.getCurrentEthAccount();
+    //   }
+    //   setEthAccount(accountName);
+    //   let tweets: string[] | undefined = undefined;
+    //   if (accountName) tweets = await bridge.getTweets(accountName);
+    //   setSavedTweets(tweets);
+    // });
   }, []);
-  const visible = (hash: string): string => {
-    const firstFourCharacters = hash.substring(0, 6);
-    const lastFourCharacters = hash.substring(hash.length - 1, hash.length - 5);
+  // const visible = (hash: string): string => {
+  //   const firstFourCharacters = hash.substring(0, 6);
+  //   const lastFourCharacters = hash.substring(hash.length - 1, hash.length - 5);
 
-    return `${firstFourCharacters}...${lastFourCharacters}`;
-  };
-  const handleSaveTweet = async (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const stringifiedCtx = JSON.stringify(parsedCtx);
-    if (savedTweets?.includes(stringifiedCtx)) return;
-    await bridge.addTweet(stringifiedCtx);
-    let tweets: string[] | undefined = undefined;
-    if (ethAccount) tweets = await bridge.getTweets(ethAccount);
-    setSavedTweets(tweets);
-    setLoading(true);
-  };
+  //   return `${firstFourCharacters}...${lastFourCharacters}`;
+  // };
+  // const handleSaveTweet = async (e: any) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   const stringifiedCtx = JSON.stringify(parsedCtx);
+  //   if (savedTweets?.includes(stringifiedCtx)) return;
+  //   await bridge.addTweet(stringifiedCtx);
+  //   let tweets: string[] | undefined = undefined;
+  //   if (ethAccount) tweets = await bridge.getTweets(ethAccount);
+  //   setSavedTweets(tweets);
+  //   setLoading(true);
+  // };
 
-  const handleDeleteTweet = (ctx: string) => async (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
-    await bridge.removeTweet(ctx);
-    let tweets: string[] | undefined = undefined;
-    if (ethAccount) tweets = await bridge.getTweets(ethAccount);
-    setSavedTweets(tweets);
-    // setLoading(true);
-  };
+  // const handleDeleteTweet = (ctx: string) => async (e: any) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   await bridge.removeTweet(ctx);
+  //   let tweets: string[] | undefined = undefined;
+  //   if (ethAccount) tweets = await bridge.getTweets(ethAccount);
+  //   setSavedTweets(tweets);
+  //   // setLoading(true);
+  // };
 
   return (
     <>
-      <header style={{ justifyContent: ethAccount ? 'space-between' : 'center' }}>
+      {/* <header style={{ justifyContent: ethAccount ? 'space-between' : 'center' }}>
         {!ethAccount ? (
           <Button
             basic
@@ -104,7 +103,7 @@ export default () => {
             </Button>
           </>
         )}
-      </header>
+      </header> */}
 
       <main>
         <div className="title">
@@ -123,7 +122,7 @@ export default () => {
                 {parsedCtx.authorUsername && <Card.Meta>@{parsedCtx.authorUsername}</Card.Meta>}
                 <Card.Description>{parsedCtx.text}</Card.Description>
               </Card.Content>
-              <Card.Content extra>
+              {/* <Card.Content extra>
                 <Button
                   disabled={
                     !ethAccount || savedTweets?.includes(JSON.stringify(parsedCtx)) || isLoading
@@ -132,11 +131,11 @@ export default () => {
                 >
                   Save to ETH
                 </Button>
-              </Card.Content>
+              </Card.Content> */}
             </Card>
           </>
         )}
-
+        {/* 
         {savedTweets && savedTweets.length > 0 && (
           <>
             <h4>Saved Tweets:</h4>
@@ -162,7 +161,7 @@ export default () => {
               );
             })}
           </>
-        )}
+        )} */}
       </main>
     </>
   );
