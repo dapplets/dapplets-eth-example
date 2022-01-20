@@ -102,6 +102,8 @@ npm start
 
 > :warning: Since the browser is blocking pages with problematic security certificates, go to https://localhost:3001/dapplet.json when the application is running and agree to run in **insecure mode**
 
+> :warning: Since the browser is blocking pages with problematic security certificates, go to https://localhost:3000 when the application is running and agree to run in **insecure mode**.
+
 Open the extension. Go to Developer tab and turn on the development server: `https://localhost:3001/dapplet.json`.
 
 ![image](https://user-images.githubusercontent.com/43613968/138610500-d40d1a49-040d-4524-afd4-18ff630f33ca.png)
@@ -208,8 +210,6 @@ Open the manifest `./dapplet/dapplet.json`.
   }
 }
 ```
-
-> :warning: Since the browser is blocking pages with problematic security certificates, go to https://localhost:3000 when the application is running and agree to run in **insecure mode**.
 
 Here we see the URL of the overlay named `'overlay'` for developers mode. During the publication of the dapplet to the registry the overlay will be published to the decentralized storage.
 
