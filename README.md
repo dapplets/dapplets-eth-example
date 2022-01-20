@@ -325,6 +325,7 @@ const ABI = [
     type: 'function',
   },
 ];
+const wallet = await Core.wallet({ type: 'ethereum', network: 'goerli' });
 const contract = await Core.contract('ethereum', '0x7702aE3E1E0a96A428052BF3E4CB94965F5C0d7F', ABI);
 const currentAccount = await new Promise((res) =>
   wallet.sendAndListen('eth_accounts', [], { result: (_, { data }) => res(data[0]) }),
