@@ -239,6 +239,8 @@ onData(callback: (data?: any) => void) {
 
 Then we use it in the `App.tsx` module.
 
+In the onData method, we subscribe to the data event described in ./dapplet/src/index.ts in the openOverlay class method, passing the "data" event to the overlay and sending the props that is the context of our tweet.
+
 ```typescript
 /* */
 import { bridge } from './dappletBridge';
