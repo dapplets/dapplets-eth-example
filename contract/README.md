@@ -13,8 +13,22 @@ Contract created for writing a tutorial on using Ethereum in a dapplet
 ```
 
 ### Use
+
 To run the project on localhost and test the contract, first enter `yarn account`, this will create a local node and allow contracts to be deployed. To deploy, call the `yarn deploy` command.
 
-You will be given the address of the created contact, for example **0xa513E6E4b8f2a923D98304ec87F64353C4D5C853**. Copy it and navigate to `/contract/scripts/tutorial.js` and write it in the `contractAddress` variable. 
+You will be given the address of the created contact, for example **0xa513E6E4b8f2a923D98304ec87F64353C4D5C853**. Copy it and navigate to `/contract/scripts/tutorial.js` and write it in the `contractAddress` variable.
 
 After that, you can test the contract.
+
+## Dapplets × ETH example
+
+**Dapplets × ETH example** is a [Dapplet](https://dapplets.org) (an Augmentation App) that can parse Twitter posts and store them in the ETH contract. It can also display your saved tweets on the overlay page.
+
+## Contacts
+
+Web: [dapplets.org](https://dapplets.org)
+Docs: [docs.dapplets.org](https://docs.dapplets.org)
+GitHub: [github.com/dapplets](https://github.com/dapplets)
+Discord: [discord.gg/YcxbkcyjMV](https://discord.gg/YcxbkcyjMV)
+Telegram: [t.me/dapplets](https://t.co/4HBqF5JEbh?amp=1)
+Twitter: [@dappletsproject](https://twitter.com/dappletsproject)
