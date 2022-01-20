@@ -1,5 +1,6 @@
 import { } from '@dapplets/dapplet-extension';
-import EXAMPLE_IMG from './icons/near_dapplet_icon.svg';
+import EXAMPLE_IMG from './icons/eth_dapplet_icon.svg';
+import isValidJSON from './helpers';
 
 @Injectable
 export default class TwitterFeature {
