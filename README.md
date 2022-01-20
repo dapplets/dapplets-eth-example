@@ -349,7 +349,6 @@ if (!this._overlay) {
     removeTweet: async (op: any, { type, message }: any) => {
       try {
         await contract.removeTweet(message.tweet);
-
         this._overlay.send('removeTweet_done');
         console.log(message.tweet);
       } catch (err) {
