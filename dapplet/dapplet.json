@@ -3,7 +3,7 @@
   "branch": "default",
   "version": { "$ref": "package.json#/version" },
   "type": "FEATURE",
-  "title": "Dapplets x Eth example",
+  "title": "Dapplets x ETH example",
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
   "icon": "src/icons/eth_dapplet_icon_70.png",
