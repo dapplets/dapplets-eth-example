@@ -1,7 +1,7 @@
 {
-  "name": "dapplets-near-example",
+  "name": "dapplets-etherium-example",
   "version": "0.1.1",
-  "description": "Example of a dapplet working with NEAR protocol. Learn NEAR x Dapplets Project",
+  "description": "Example of a dapplet working with Etherium protocol. Learn Etherium x Dapplets Project",
   "main": "",
   "scripts": {
     "postinstall": "concurrently -c magenta,cyan -n dapplet,overlay \"npm run install:dapplet\" \"npm run install:overlay\"",
@@ -11,10 +11,6 @@
     "start:dapplet": "cd dapplet && npm start",
     "start:overlay": "cd overlay && npm start",
     "prettier": "npx prettier --write ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dapplets/dapplet-near-example.git"
   },
   "cacheDirectories": [
     "dapplet/node_modules",
@@ -28,7 +24,12 @@
     "prettier": "2.2.1"
   },
   "bugs": {
-    "url": "https://github.com/dapplets/dapplet-near-example/issues"
+    "url": "https://github.com/dapplets/dapplets-eth-example/issues"
   },
-  "homepage": "https://github.com/dapplets/dapplet-near-example#readme"
+  "homepage": "https://github.com/dapplets/dapplets-eth-example#readme",
+  "dependencies": {
+    "@dapplets/dapplet-overlay-bridge": "^0.1.0",
+    "ethers": "^5.5.3",
+    "near-api-js": "^0.44.2"
+  }
 }
