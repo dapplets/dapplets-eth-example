@@ -14,7 +14,7 @@ export default () => {
   const [parsedCtx, setParsedCtx] = useState<ICtx>();
   const [ethAccount, setEthAccount] = useState<string>();
   const [savedTweets, setSavedTweets] = useState<string[]>();
-  const [isLoading, setLoading] = useState<boolean>();
+  const [isLoading = false, setLoading] = useState<boolean>();
   useEffect(() => {
     bridge.onData((data?: ICtx) => {
       setParsedCtx(data);
@@ -46,7 +46,7 @@ export default () => {
     let tweets: string[] | undefined = undefined;
     if (ethAccount) tweets = await bridge.getTweets(ethAccount);
     setSavedTweets(tweets);
-    setLoading(true);
+    setLoading(!isLoading);
   };
 
   const handleDeleteTweet = (ctx: string) => async (e: any) => {
@@ -56,7 +56,7 @@ export default () => {
     let tweets: string[] | undefined = undefined;
     if (ethAccount) tweets = await bridge.getTweets(ethAccount);
     setSavedTweets(tweets);
-    // setLoading(true);
+    setLoading(!isLoading);
   };
 
   return (

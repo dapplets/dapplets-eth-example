@@ -35,7 +35,9 @@ class Bridge extends GeneralBridge {
       'getCurrentEthAccount_undone',
     );
   }
-
+  async isWaitTweet(): Promise<boolean> {
+    return this.call('isWaitTweet', null, 'isWaitTweet_done', 'isWaitTweet_undone');
+  }
   async getTweets(accountId: string): Promise<string[]> {
     return this.call('getTweets', { accountId }, 'getTweets_done', 'getTweets_undone');
   }
