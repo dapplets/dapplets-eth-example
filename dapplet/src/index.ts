@@ -74,8 +74,9 @@ export default class TwitterFeature {
           },
           addTweet: async (op: any, { type, message }: any) => {
             try {
+              const add = await contract.addTweet(message.tweet);
+              await add.wait();
               this._overlay.send('addTweet_done');
-              await contract.addTweet(message.tweet);
             } catch (err) {
               this._overlay.send('addTweet_undone', err);
             }
@@ -83,8 +84,8 @@ export default class TwitterFeature {
           removeTweet: async (op: any, { type, message }: any) => {
             try {
               this._overlay.send('removeTweet', true);
-              await contract.removeTweet(message.tweet);
-
+              const add = await contract.removeTweet(message.tweet);
+              await add.wait();
               this._overlay.send('removeTweet_done', false);
             } catch (err) {
               this._overlay.send('removeTweet_undone', err);

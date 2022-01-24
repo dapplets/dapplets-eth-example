@@ -14,7 +14,7 @@ export default () => {
   const [parsedCtx, setParsedCtx] = useState<ICtx>();
   const [ethAccount, setEthAccount] = useState<string>();
   const [savedTweets, setSavedTweets] = useState<string[]>();
-  const [isLoading = false, setLoading] = useState<boolean>();
+
   useEffect(() => {
     bridge.onData((data?: ICtx) => {
       setParsedCtx(data);
@@ -46,17 +46,16 @@ export default () => {
     let tweets: string[] | undefined = undefined;
     if (ethAccount) tweets = await bridge.getTweets(ethAccount);
     setSavedTweets(tweets);
-    setLoading(!isLoading);
   };
 
   const handleDeleteTweet = (ctx: string) => async (e: any) => {
     e.preventDefault();
     e.stopPropagation();
+
     await bridge.removeTweet(ctx);
     let tweets: string[] | undefined = undefined;
     if (ethAccount) tweets = await bridge.getTweets(ethAccount);
     setSavedTweets(tweets);
-    setLoading(!isLoading);
   };
 
   return (
@@ -125,9 +124,7 @@ export default () => {
               </Card.Content>
               <Card.Content extra>
                 <Button
-                  disabled={
-                    !ethAccount || savedTweets?.includes(JSON.stringify(parsedCtx)) || isLoading
-                  }
+                  disabled={!ethAccount || savedTweets?.includes(JSON.stringify(parsedCtx))}
                   onClick={handleSaveTweet}
                 >
                   Save to ETH
@@ -151,10 +148,7 @@ export default () => {
                     <Card.Description>{tweetData.text}</Card.Description>
                   </Card.Content>
                   <Card.Content extra>
-                    <Button
-                      disabled={!ethAccount || isLoading}
-                      onClick={handleDeleteTweet(savedTweet)}
-                    >
+                    <Button disabled={!ethAccount} onClick={handleDeleteTweet(savedTweet)}>
                       Delete from ETH
                     </Button>
                   </Card.Content>
