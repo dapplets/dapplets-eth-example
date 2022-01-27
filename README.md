@@ -1,12 +1,12 @@
-# Dapplets × Etherium example
+# Dapplets × Ethereum example
 
-**Dapplets × Etherium example** is a [Dapplet](https://dapplets.org) (an Augmentation App) that can parse Twitter tweets and store them in the Etherium contract. It can also display your saved tweets in the overlay page.
+**Dapplets × Ethereum example** is a [Dapplet](https://dapplets.org) (an Augmentation App) that can parse Twitter tweets and store them in the Ethereum contract. It can also display your saved tweets in the overlay page.
 
 ## 1. Introduction
 
 **Dapplets** - applications that interact with web-pages, augment them by inserting different widgets, parsing pages data and adding some new functionality. It may improve user experience of using social media, video services and other sourses.
 
-Dapplets use the **extension** we are creating. It gives a simple api for dapplets developers and big abilities for our community. Our platform is decentralized. We use **Near** and **Etherium** networks for our registries and contracts, and decentralized storages, like **Swarm**, **IPFS** and **Arweave** for hosting dapplets code and multimedia.
+Dapplets use the **extension** we are creating. It gives a simple api for dapplets developers and big abilities for our community. Our platform is decentralized. We use **Near** and **Ethereum** networks for our registries and contracts, and decentralized storages, like **Swarm**, **IPFS** and **Arweave** for hosting dapplets code and multimedia.
 
 To use our platform at first you need to install the **Dapplets extension**. Currently it's on the alfa-stage and not published to Google Chrome or some other store. To install it follow this steps:
 
@@ -31,13 +31,13 @@ To use our platform at first you need to install the **Dapplets extension**. Cur
    >
    > ![image](https://user-images.githubusercontent.com/43613968/118473927-2ea8ad00-b713-11eb-9bbf-f2b7cb33a6bf.png)
 
-6. Click to the **Dapplets** extension icon in extension bar. Try **Dapplets × Etherium example** dapplet.
+6. Click to the **Dapplets** extension icon in extension bar. Try **Dapplets × Ethereum example** dapplet.
 
 ## 2. Tutorial
 
-Let's study how this dapplet works and why Dapplets is a Etherium frendly platform.
+Let's study how this dapplet works and why Dapplets is a Ethereum frendly platform.
 
-The goal of the example is to show interaction of Etherium and Dapplets. If it is your very first meeting with Dapplets we recommend you to try our [documentation.](https://docs.dapplets.org) It contains several exercises that explane how to create dapplets and adapters from simple to complex ones. We are highly recommend to go through the [ex01](https://docs.dapplets.org/docs/extra-button) and [ex04](https://docs.dapplets.org/docs/overlays) examples that describe how to create the simpliest dapplet and the dapplet with the overlay. The knowledges you'll get make easy to understand the current example.
+The goal of the example is to show interaction of Ethereum and Dapplets. If it is your very first meeting with Dapplets we recommend you to try our [documentation.](https://docs.dapplets.org) It contains several exercises that explane how to create dapplets and adapters from simple to complex ones. We are highly recommend to go through the [ex01](https://docs.dapplets.org/docs/extra-button) and [ex04](https://docs.dapplets.org/docs/overlays) examples that describe how to create the simpliest dapplet and the dapplet with the overlay. The knowledges you'll get make easy to understand the current example.
 
 The initial code for this example is here: [exercise](https://github.com/dapplets/dapplets-eth-example)
 
@@ -49,7 +49,7 @@ Let's look at the **structure**. There are three components: **dapplet**, **over
 
 We define **Overlay** as a place where a user can do something with parsed data, connect to core dapplet's functions through the **dapplet bridge** and manage augmentation parameters. It is an impotrant part of the application but it runs in another environment and published as a separate module. In the most cases we use **React** as one of the most popular frameworks. But you can use a framework that you prefer or the pure javascript or typescript.
 
-**Contract** does not connect directly with other modules and may located outside of the dapplet. But this simple **Etherium** contract created only for this dapplet. So it's comfortable to place it here.
+**Contract** does not connect directly with other modules and may located outside of the dapplet. But this simple **Ethereum** contract created only for this dapplet. So it's comfortable to place it here.
 
 Let'a look at the each module.
 
@@ -124,7 +124,7 @@ Let's change our code. Add private class variable `_overlay` of type `any`. In t
 
 ```typescript
 if (!this._overlay) {
-  this._overlay = (<any>Core).overlay({ name: 'overlay', title: 'Dapplets x Etherium example' });
+  this._overlay = (<any>Core).overlay({ name: 'overlay', title: 'Dapplets x Ethereum example' });
 }
 ```
 
@@ -159,7 +159,7 @@ export default class TwitterFeature {
     if (!this._overlay) {
       this._overlay = (<any>Core).overlay({
         name: 'overlay',
-        title: 'Dapplets x Etherium example',
+        title: 'Dapplets x Ethereum example',
       });
     }
 
@@ -193,7 +193,7 @@ Open the manifest `./dapplet/dapplet.json`.
   "branch": "default",
   "version": { "$ref": "package.json#/version" },
   "type": "FEATURE",
-  "title": "Dapplets x Etherium example",
+  "title": "Dapplets x Ethereum example",
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
   "icon": "src/icons/eth_dapplet_icon_70.png",
@@ -262,9 +262,9 @@ Now save changes and reload the Twitter page. On button click you will see the o
 
 ![3 (1)](https://user-images.githubusercontent.com/79759758/150392361-8e31b9fd-4fa0-4fc7-bafa-8929c2d84138.png)
 
-Thats cool! But our goal is to save this data to Etherium chain and get it back. So let's see the contract.
+Thats cool! But our goal is to save this data to Ethereum chain and get it back. So let's see the contract.
 
-### 2.3. Etherium smart contract
+### 2.3. Ethereum smart contract
 
 It stores an array of serialized tweets data by the current user ID. It has methods for saving, removing and retrieving saved tweets.
 
@@ -276,7 +276,7 @@ Add the folowing code to the `activate` method of the `./dapplet/src/index.ts` m
 const contract = await Core.contract('ethereum', '0x7702aE3E1E0a96A428052BF3E4CB94965F5C0d7F', ABI);
 ```
 
-There is a `Core.contract` method that receives 3 parameters: name of the network ('near' or 'etherium'), contract name and object with view and change methods.
+There is a `Core.contract` method that receives 3 parameters: name of the network ('near' or 'Ethereum'), contract name and object with view and change methods.
 
 Now we will make the contract methods available in the overlay. In order to pass methods through the dapplets bridge, add a `listen` function to the overlay call. Don't be afraid, just copy and paste this code :)
 
@@ -452,7 +452,7 @@ public async call(
 }
 ```
 
-Now we can use contract methods in the overlay modules. We can authorize the dapplet with the Etherium testnet wallet and save the data of the selected tweets to the smart contract. Also we see the saved data in the overlay.
+Now we can use contract methods in the overlay modules. We can authorize the dapplet with the Ethereum testnet wallet and save the data of the selected tweets to the smart contract. Also we see the saved data in the overlay.
 
 Uncommit all the commited code in the `./overlay/src/App.tsx`. Save changes and reload the Twitter page.
 
@@ -478,4 +478,4 @@ Here is the result: [dapplets-eth-example](https://github.com/dapplets/dapplets-
 
 If something didn't work out for you or you still have questions, welcome to our chats in [Discord](https://discord.gg/YcxbkcyjMV) and [Telegram](https://t.me/dapplets).
 
-Thank you for your time. I hope this new knowledge will be useful to you in developing impressive and successful applications on the Dapplets platform using the capabilities of the Etherium protocol 🚀✨
+Thank you for your time. I hope this new knowledge will be useful to you in developing impressive and successful applications on the Dapplets platform using the capabilities of the Ethereum protocol 🚀✨
