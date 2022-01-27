@@ -1,5 +1,5 @@
 import {} from '@dapplets/dapplet-extension';
-import EXAMPLE_IMG from './icons/eth_dapplet_icon_70.png';
+import EXAMPLE_IMG from './icons/eth_dapplet_icon.svg';
 import ABI from './ABI';
 import isValidJSON from './helpers';
 
