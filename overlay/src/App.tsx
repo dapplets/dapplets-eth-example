@@ -14,7 +14,10 @@ export default () => {
   const [parsedCtx, setParsedCtx] = useState<ICtx>();
   const [ethAccount, setEthAccount] = useState<string>();
   const [savedTweets, setSavedTweets] = useState<string[]>();
+<<<<<<< HEAD
   const [isLoading = false, setLoading] = useState<boolean>();
+=======
+>>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
 
   useEffect(() => {
     bridge.onData((data?: ICtx) => {
@@ -48,7 +51,10 @@ export default () => {
     let tweets: string[] | undefined = undefined;
     if (ethAccount) tweets = await bridge.getTweets(ethAccount);
     setSavedTweets(tweets);
+<<<<<<< HEAD
     setLoading(!isLoading);
+=======
+>>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
   };
 
   const handleDeleteTweet = (ctx: string) => async (e: any) => {
@@ -59,6 +65,7 @@ export default () => {
     // setLoading(isWaitTweet);
     let tweets: string[] | undefined = undefined;
     if (ethAccount) tweets = await bridge.getTweets(ethAccount);
+<<<<<<< HEAD
     setLoading(!isLoading);
     // uploadFile();
     // bridge.isWaitTweet().then(async (isWaitTweet) => {
@@ -70,6 +77,10 @@ export default () => {
   //     setLoading(isWaitTweet);
   //   });
   // };
+=======
+    setSavedTweets(tweets);
+  };
+>>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
 
   return (
     <>
@@ -79,6 +90,10 @@ export default () => {
             basic
             color="red"
             className="login"
+<<<<<<< HEAD
+=======
+            // disabled={isLoading}
+>>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
             onClick={async () => {
               const isWalletConnected = await bridge.isWalletConnected();
               let accountName: string;
@@ -136,9 +151,13 @@ export default () => {
               </Card.Content>
               <Card.Content extra>
                 <Button
+<<<<<<< HEAD
                   disabled={
                     !ethAccount || savedTweets?.includes(JSON.stringify(parsedCtx)) || isLoading
                   }
+=======
+                  disabled={!ethAccount || savedTweets?.includes(JSON.stringify(parsedCtx))}
+>>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
                   onClick={handleSaveTweet}
                 >
                   Save to ETH
@@ -162,6 +181,7 @@ export default () => {
                     <Card.Description>{tweetData.text}</Card.Description>
                   </Card.Content>
                   <Card.Content extra>
+<<<<<<< HEAD
                     <Button
                       disabled={!ethAccount || isLoading}
                       onClick={
@@ -174,6 +194,9 @@ export default () => {
                         // }
                       }
                     >
+=======
+                    <Button disabled={!ethAccount} onClick={handleDeleteTweet(savedTweet)}>
+>>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
                       Delete from ETH
                     </Button>
                   </Card.Content>

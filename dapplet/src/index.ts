@@ -1,5 +1,9 @@
 import {} from '@dapplets/dapplet-extension';
+<<<<<<< HEAD
 import EXAMPLE_IMG from './icons/eth_dapplet_icon_70.png';
+=======
+import EXAMPLE_IMG from './icons/eth_dapplet_icon.svg';
+>>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
 import ABI from './ABI';
 import isValidJSON from './helpers';
 
@@ -74,8 +78,14 @@ export default class TwitterFeature {
           },
           addTweet: async (op: any, { type, message }: any) => {
             try {
+<<<<<<< HEAD
               this._overlay.send('addTweet_done');
               await contract.addTweet(message.tweet);
+=======
+              const add = await contract.addTweet(message.tweet);
+              await add.wait();
+              this._overlay.send('addTweet_done');
+>>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
             } catch (err) {
               this._overlay.send('addTweet_undone', err);
             }
@@ -83,9 +93,14 @@ export default class TwitterFeature {
           removeTweet: async (op: any, { type, message }: any) => {
             try {
               this._overlay.send('removeTweet', true);
+<<<<<<< HEAD
               await contract.removeTweet(message.tweet);
 
               console.log(this._overlay.send);
+=======
+              const add = await contract.removeTweet(message.tweet);
+              await add.wait();
+>>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
               this._overlay.send('removeTweet_done', false);
             } catch (err) {
               this._overlay.send('removeTweet_undone', err);

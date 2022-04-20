@@ -26,6 +26,7 @@ class Bridge extends GeneralBridge {
       'isWalletConnected_undone',
     );
   }
+<<<<<<< HEAD
 
   async getCurrentEthAccount(): Promise<string> {
     return this.call(
@@ -39,6 +40,20 @@ class Bridge extends GeneralBridge {
     return this.call('isWaitTweet', null, 'isWaitTweet_done', 'isWaitTweet_undone');
   }
 
+=======
+
+  async getCurrentEthAccount(): Promise<string> {
+    return this.call(
+      'getCurrentEthAccount',
+      null,
+      'getCurrentEthAccount_done',
+      'getCurrentEthAccount_undone',
+    );
+  }
+  async isWaitTweet(): Promise<boolean> {
+    return this.call('isWaitTweet', null, 'isWaitTweet_done', 'isWaitTweet_undone');
+  }
+>>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
   async getTweets(accountId: string): Promise<string[]> {
     return this.call('getTweets', { accountId }, 'getTweets_done', 'getTweets_undone');
   }
