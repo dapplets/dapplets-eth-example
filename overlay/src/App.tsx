@@ -14,7 +14,8 @@ export default () => {
   const [parsedCtx, setParsedCtx] = useState<ICtx>();
   const [ethAccount, setEthAccount] = useState<string>();
   const [savedTweets, setSavedTweets] = useState<string[]>();
-  const [isLoading, setLoading] = useState<boolean>();
+  const [isLoading = false, setLoading] = useState<boolean>();
+
   useEffect(() => {
     bridge.onData((data?: ICtx) => {
       setParsedCtx(data);
@@ -40,24 +41,35 @@ export default () => {
   const handleSaveTweet = async (e: any) => {
     e.preventDefault();
     e.stopPropagation();
+
     const stringifiedCtx = JSON.stringify(parsedCtx);
     if (savedTweets?.includes(stringifiedCtx)) return;
     await bridge.addTweet(stringifiedCtx);
     let tweets: string[] | undefined = undefined;
     if (ethAccount) tweets = await bridge.getTweets(ethAccount);
     setSavedTweets(tweets);
-    setLoading(true);
+    setLoading(!isLoading);
   };
 
   const handleDeleteTweet = (ctx: string) => async (e: any) => {
     e.preventDefault();
     e.stopPropagation();
+
     await bridge.removeTweet(ctx);
+    // setLoading(isWaitTweet);
     let tweets: string[] | undefined = undefined;
     if (ethAccount) tweets = await bridge.getTweets(ethAccount);
-    setSavedTweets(tweets);
-    // setLoading(true);
+    setLoading(!isLoading);
+    // uploadFile();
+    // bridge.isWaitTweet().then(async (isWaitTweet) => {
+    //   setLoading(isWaitTweet);
+    // });
   };
+  // const uploadFile = () => async () => {
+  //   bridge.isWaitTweet().then(async (isWaitTweet) => {
+  //     setLoading(isWaitTweet);
+  //   });
+  // };
 
   return (
     <>
@@ -67,7 +79,6 @@ export default () => {
             basic
             color="red"
             className="login"
-            // disabled={isLoading}
             onClick={async () => {
               const isWalletConnected = await bridge.isWalletConnected();
               let accountName: string;
@@ -153,7 +164,15 @@ export default () => {
                   <Card.Content extra>
                     <Button
                       disabled={!ethAccount || isLoading}
-                      onClick={handleDeleteTweet(savedTweet)}
+                      onClick={
+                        // () => {
+                        // uploadFile();
+                        // setLoading(false);
+                        handleDeleteTweet(savedTweet)
+                        // console.log(uploadFile());
+                        // setLoading(true);
+                        // }
+                      }
                     >
                       Delete from ETH
                     </Button>

@@ -76,19 +76,17 @@ export default class TwitterFeature {
             try {
               this._overlay.send('addTweet_done');
               await contract.addTweet(message.tweet);
-
-              console.log(message.tweet);
             } catch (err) {
               this._overlay.send('addTweet_undone', err);
             }
           },
           removeTweet: async (op: any, { type, message }: any) => {
             try {
-              // сделать ремув твит старт (тру)
+              this._overlay.send('removeTweet', true);
               await contract.removeTweet(message.tweet);
-              // передать переменнут ремув контракт тру, от переменнтой вызывать метод цфше / когда исполнится
-              this._overlay.send('removeTweet_done');
-              console.log(message.tweet);
+
+              console.log(this._overlay.send);
+              this._overlay.send('removeTweet_done', false);
             } catch (err) {
               this._overlay.send('removeTweet_undone', err);
             }
