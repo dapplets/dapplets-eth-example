@@ -1,9 +1,5 @@
 import {} from '@dapplets/dapplet-extension';
-<<<<<<< HEAD
-import EXAMPLE_IMG from './icons/eth_dapplet_icon_70.png';
-=======
 import EXAMPLE_IMG from './icons/eth_dapplet_icon.svg';
->>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
 import ABI from './ABI';
 import isValidJSON from './helpers';
 
@@ -14,99 +10,100 @@ export default class TwitterFeature {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
   async activate(): Promise<void> {
+    if (Core.state === undefined) {
+      alert(`
+DAPPLETS x ETH EXAMPLE DAPPLET
+
+Download the latest version of Dapplets Extension here:
+
+https://github.com/dapplets/dapplet-extension/releases/latest
+      `);
+      return;
+    }
     const contract = await Core.contract(
       'ethereum',
       '0x7702aE3E1E0a96A428052BF3E4CB94965F5C0d7F',
       ABI,
     );
     if (!this._overlay) {
-      this._overlay = (<any>Core)
-        .overlay({ name: 'overlay', title: 'Dapplets x ETH example' })
-        .listen({
-          connectWallet: async () => {
+      this._overlay = Core.overlay({ name: 'overlay', title: 'Dapplets x ETH example' }).listen({
+        connectWallet: async () => {
+          try {
+            const wallet = await Core.wallet({ type: 'ethereum', network: 'goerli' });
+            await wallet.connect();
+            const currentAccounts = await wallet.request({ method: 'eth_accounts', params: [] });
+            this._overlay.send('connectWallet_done', currentAccounts[0]);
+          } catch (err) {
+            this._overlay.send('connectWallet_undone', err);
+          }
+        },
+        disconnectWallet: async () => {
+          try {
+            const wallet = await Core.wallet({ type: 'ethereum', network: 'goerli' });
+            await wallet.disconnect();
+            this._overlay.send('disconnectWallet_done');
+          } catch (err) {
+            this._overlay.send('disconnectWallet_undone', err);
+          }
+        },
+        isWalletConnected: async () => {
+          try {
+            const wallet = await Core.wallet({ type: 'ethereum', network: 'goerli' });
+            const isWalletConnected = await wallet.isConnected();
+            this._overlay.send('isWalletConnected_done', isWalletConnected);
+          } catch (err) {
+            this._overlay.send('isWalletConnected_undone', err);
+          }
+        },
+        getCurrentEthAccount: async () => {
+          try {
+            const wallet = await Core.wallet({ type: 'ethereum', network: 'goerli' });
+            const currentAccounts = await wallet.request({ method: 'eth_accounts', params: [] });
+            this._overlay.send('getCurrentEthAccount_done', currentAccounts[0]);
+          } catch (err) {
+            this._overlay.send('getCurrentEthAccount_undone', err);
+          }
+        },
+        getTweets: async (op: any, { type, message }: any) => {
+          try {
+            const wallet = await Core.wallet({ type: 'ethereum', network: 'goerli' });
+            const currentAccounts = await wallet.request({ method: 'eth_accounts', params: [] });
+            console.log('currentAccounts', currentAccounts);
+            const tweets = await contract.getTweets(currentAccounts[0]);
+            this._overlay.send('getTweets_done', tweets.filter(isValidJSON));
+          } catch (err) {
+            this._overlay.send('getTweets_undone', err);
+          }
+        },
+        addTweet: async (op: any, { type, message }: any) => {
+          try {
+            console.log('message.tweet', message.tweet);
             try {
-              const wallet = await Core.wallet({ type: 'ethereum', network: 'goerli' });
-              await wallet.connect();
-              const currentAccount = await new Promise((res) =>
-                wallet.sendAndListen('eth_accounts', [], { result: (_, { data }) => res(data[0]) }),
-              );
-              this._overlay.send('connectWallet_done', currentAccount);
-            } catch (err) {
-              this._overlay.send('connectWallet_undone', err);
-            }
-          },
-          disconnectWallet: async () => {
-            try {
-              const wallet = await Core.wallet({ type: 'ethereum', network: 'goerli' });
-              await wallet.disconnect();
-              this._overlay.send('disconnectWallet_done');
-            } catch (err) {
-              this._overlay.send('disconnectWallet_undone', err);
-            }
-          },
-          isWalletConnected: async () => {
-            try {
-              const wallet = await Core.wallet({ type: 'ethereum', network: 'goerli' });
-              const isWalletConnected = await wallet.isConnected();
-              this._overlay.send('isWalletConnected_done', isWalletConnected);
-            } catch (err) {
-              this._overlay.send('isWalletConnected_undone', err);
-            }
-          },
-          getCurrentEthAccount: async () => {
-            try {
-              const wallet = await Core.wallet({ type: 'ethereum', network: 'goerli' });
-              const currentAccount = await new Promise((res) =>
-                wallet.sendAndListen('eth_accounts', [], { result: (_, { data }) => res(data[0]) }),
-              );
-              this._overlay.send('getCurrentEthAccount_done', currentAccount);
-            } catch (err) {
-              this._overlay.send('getCurrentEthAccount_undone', err);
-            }
-          },
-          getTweets: async (op: any, { type, message }: any) => {
-            try {
-              const wallet = await Core.wallet({ type: 'ethereum', network: 'goerli' });
-              const currentAccount = await new Promise((res) =>
-                wallet.sendAndListen('eth_accounts', [], { result: (_, { data }) => res(data[0]) }),
-              );
-              const tweets = await contract.getTweets(currentAccount);
-              this._overlay.send('getTweets_done', tweets.filter(isValidJSON));
-            } catch (err) {
-              this._overlay.send('getTweets_undone', err);
-            }
-          },
-          addTweet: async (op: any, { type, message }: any) => {
-            try {
-<<<<<<< HEAD
-              this._overlay.send('addTweet_done');
-              await contract.addTweet(message.tweet);
-=======
               const add = await contract.addTweet(message.tweet);
-              await add.wait();
-              this._overlay.send('addTweet_done');
->>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
+              try {
+                await add.wait();
+              } catch (err) {
+                console.log('*** ERROR in add.wait()', err);
+              }
             } catch (err) {
-              this._overlay.send('addTweet_undone', err);
+              console.log('*** ERROR in contract.addTweet()', err);
             }
-          },
-          removeTweet: async (op: any, { type, message }: any) => {
-            try {
-              this._overlay.send('removeTweet', true);
-<<<<<<< HEAD
-              await contract.removeTweet(message.tweet);
-
-              console.log(this._overlay.send);
-=======
-              const add = await contract.removeTweet(message.tweet);
-              await add.wait();
->>>>>>> 9870430992623e67f1bba438376432edfc8d78b0
-              this._overlay.send('removeTweet_done', false);
-            } catch (err) {
-              this._overlay.send('removeTweet_undone', err);
-            }
-          },
-        });
+            this._overlay.send('addTweet_done');
+          } catch (err) {
+            this._overlay.send('addTweet_undone', err);
+          }
+        },
+        removeTweet: async (op: any, { type, message }: any) => {
+          try {
+            this._overlay.send('removeTweet', true);
+            const add = await contract.removeTweet(message.tweet);
+            await add.wait();
+            this._overlay.send('removeTweet_done', false);
+          } catch (err) {
+            this._overlay.send('removeTweet_undone', err);
+          }
+        },
+      });
     }
     Core.onAction(() => this.openOverlay());
     const { button } = this.adapter.exports;
