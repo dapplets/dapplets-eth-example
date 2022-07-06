@@ -17,7 +17,7 @@ export default () => {
 
   useEffect(() => {
     bridge.onData((data?: ICtx) => {
-      console.log('data', data);
+     
       setParsedCtx(data);
     });
     bridge.isWalletConnected().then(async (isWalletConnected) => {
@@ -34,7 +34,7 @@ export default () => {
   }, []);
   const visible = (hash: string): string => {
     const firstFourCharacters = hash.substring(0, 6);
-    const lastFourCharacters = hash.substring(hash.length - 1, hash.length - 5);
+    const lastFourCharacters = hash.substring(hash.length - 0, hash.length - 6);
 
     return `${firstFourCharacters}...${lastFourCharacters}`;
   };
